@@ -82,9 +82,9 @@ public abstract class AbstractRubyTask implements CommonTaskType {
             ExternalProcess externalProcess = getProcessService().createExternalProcess(
                     commonTaskContext,
                     new ExternalProcessBuilder()
-                            .env( envVars )
-                            .command( commandsList )
-                            .workingDirectory( commonTaskContext.getWorkingDirectory() ) );
+                            .env(envVars)
+                            .command(commandsList)
+                            .workingDirectory(commonTaskContext.getWorkingDirectory()) );
 
             externalProcess.execute();
 
@@ -152,8 +152,20 @@ public abstract class AbstractRubyTask implements CommonTaskType {
 
     protected String getRubyExecutablePath( final RubyLabel rubyRuntimeLabel ) {
 
-        final Capability capability = this.getCapabilityContext().getCapabilitySet().getCapability( rubyRuntimeLabel.toCapabilityLabel() );
-        Preconditions.checkNotNull( capability, "Capability" );
+	    this.log.info(">*>*>**>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>**>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>");
+	    this.log.info("" + rubyRuntimeLabel.toCapabilityLabel());
+	    this.log.info("" + this.getCapabilityContext().getCapabilitySet().getCapabilities());
+	    this.log.info(">*>*>**>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>**>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>*>");
+
+        Capability capability = this.getCapabilityContext().getCapabilitySet().getCapability( rubyRuntimeLabel.toCapabilityLabel() );
+
+	    if(null == capability)
+	    {
+		    String label = rubyRuntimeLabel.toCapabilityLabel().replaceFirst("ruby", "command");
+		    capability = this.getCapabilityContext().getCapabilitySet().getCapability(label);
+	    }
+
+        Preconditions.checkNotNull( capability, "Capability : "+rubyRuntimeLabel.toCapabilityLabel() );
         final String rubyRuntimeExecutable = capability.getValue();
         Preconditions.checkNotNull( rubyRuntimeExecutable, "rubyRuntimeExecutable" );
         return rubyRuntimeExecutable;
@@ -175,8 +187,8 @@ public abstract class AbstractRubyTask implements CommonTaskType {
         final RubyLocator rubyLocator = getRubyLocator( rubyRuntimeLabel.getRubyRuntimeManager() );
 
         return rubyLocator.buildEnv( rubyRuntimeLabel.getRubyRuntime(), getRubyExecutablePath( rubyRuntimeLabel ), ImmutableMap
-                .<String, String> builder()
-                .putAll( currentEnvVars )
+                .<String, String>builder()
+                .putAll(currentEnvVars )
                 .putAll( configEnvVars )
                 .build() );
     }
