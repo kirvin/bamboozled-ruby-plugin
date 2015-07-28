@@ -39,6 +39,71 @@
 		<bamboo.data.version>5.7.2</bamboo.data.version>
 		<amps.version>5.0.13</amps.version>
 	</properties>
+	<repositories>
+		<!-- provides javax::jms dependencies -->
+		<repository>
+			<id>repository.jboss.org-public</id>
+			<name>JBoss.org Maven repository</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>atlassian-public</id>
+			<url>https://maven.atlassian.com/content/repositories/atlassian-public</url>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>atlassian-public-snapshot</id>
+			<url>https://maven.atlassian.com/public-snapshot/</url>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>atlassian-public-m2proxy</id>
+			<url>https://m2proxy.atlassian.com/repository/public</url>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>atlassian-plugin-sdk</id>
+			<url>https://maven.atlassian.com/content/repositories/atlassian-public</url>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>atlassian-public-m2proxy</id>
+			<url>https://m2proxy.atlassian.com/repository/public</url>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>	
 	<dependencies>
 		<dependency>
 			<groupId>log4j</groupId>
